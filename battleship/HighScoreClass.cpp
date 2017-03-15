@@ -1,0 +1,223 @@
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <list>
+#include "HighScoreClass.h"
+#include "constants.h"
+
+using namespace std;
+
+void HighScoreClass::handleMultiplayerScore(int inScore)
+{
+  bool newHighScore = false;
+
+  currentScore = inScore;
+
+  ifstream inFile;
+  inFile.open(NAME_OF_HIGH_SCORE_LIST.c_str());
+
+  inFile >> multiplayerTitle;
+
+    for (int i = 0; i < LENGTH_OF_HIGH_SCORE_LIST; i++)
+    {
+      inFile >> existingMultiplayerInitials;
+      multiplayerInitials.push_back(existingMultiplayerInitials);
+      inFile >> existingMultiplayerScore;
+      multiplayerScores.push_back(existingMultiplayerScore);
+    }
+
+  inFile >> singlePlayerTitle;
+
+  for (int i = 0; i < LENGTH_OF_HIGH_SCORE_LIST; i++)
+  {
+    inFile >> existingSinglePlayerInitials;
+    singlePlayerInitials.push_back(existingSinglePlayerInitials);
+    inFile >> existingSinglePlayerScore;
+    singlePlayerScores.push_back(existingSinglePlayerScore);
+  }
+    
+    for (k = multiplayerScores.begin(); k != multiplayerScores.end(); ++k)
+    {
+      if (k == multiplayerScores.begin())
+      {
+        p = multiplayerInitials.begin();
+      }
+
+      if (currentScore <= *k && newHighScore == false)
+      {
+        newHighScore = true;
+
+        multiplayerScores.insert(k,currentScore);
+        multiplayerScores.pop_back();
+
+        cout << "Congratulations, you've achieved a new high score!" << endl;
+        cout << "Please enter your initials for this high score: ";
+        cin >> currentInitials;
+        multiplayerInitials.insert(p,currentInitials);
+        multiplayerInitials.pop_back();
+        cout << endl;
+        break;
+      }
+      ++p;
+    }
+
+        ofstream outFile;
+        outFile.open(NAME_OF_HIGH_SCORE_LIST.c_str());
+        outFile << "MULTIPLAYER" << endl;
+
+        for (l = multiplayerInitials.begin(); l != multiplayerInitials.end(); ++l)
+        {
+          if (l == multiplayerInitials.begin())
+          {
+            q = multiplayerScores.begin();
+          }
+
+          outFile << *l << " " << *q << endl;
+          
+          ++q;
+        }
+
+        outFile << "SINGLEPLAYER" << endl;
+        
+        for (r = singlePlayerInitials.begin(); r != singlePlayerInitials.end(); ++r)
+        {
+          if (r == singlePlayerInitials.begin())
+          {
+            s = singlePlayerScores.begin();
+          }
+
+          outFile << *r << " " << *s << endl;
+          
+          ++s;
+        }
+
+        outFile.close();
+
+      if (newHighScore == false)
+      {
+        cout << "No high score achieved during this game." << endl;
+      }
+}
+
+void HighScoreClass::handleSinglePlayerScore(int inScore)
+{
+  bool newHighScore = false;
+
+  currentScore = inScore;
+
+  ifstream inFile;
+  inFile.open(NAME_OF_HIGH_SCORE_LIST.c_str());
+
+  inFile >> multiplayerTitle;
+
+    for (int i = 0; i < LENGTH_OF_HIGH_SCORE_LIST; i++)
+    {
+      inFile >> existingMultiplayerInitials;
+      multiplayerInitials.push_back(existingMultiplayerInitials);
+      inFile >> existingMultiplayerScore;
+      multiplayerScores.push_back(existingMultiplayerScore);
+    }
+
+  inFile >> singlePlayerTitle;
+
+  for (int i = 0; i < LENGTH_OF_HIGH_SCORE_LIST; i++)
+  {
+    inFile >> existingSinglePlayerInitials;
+    singlePlayerInitials.push_back(existingSinglePlayerInitials);
+    inFile >> existingSinglePlayerScore;
+    singlePlayerScores.push_back(existingSinglePlayerScore);
+  }
+    
+    for (v = singlePlayerScores.begin(); v != singlePlayerScores.end(); ++v)
+    {
+      if (v == singlePlayerScores.begin())
+      {
+        t = singlePlayerInitials.begin();
+      }
+
+      if (currentScore <= *v && newHighScore == false)
+      {
+        newHighScore = true;
+
+        singlePlayerScores.insert(v,currentScore);
+        singlePlayerScores.pop_back();
+
+        cout << "Congratulations, you've achieved a new high score!" << endl;
+        cout << "Please enter your initials for this high score: ";
+        cin >> currentInitials;
+        singlePlayerInitials.insert(t,currentInitials);
+        singlePlayerInitials.pop_back();
+        cout << endl;
+        break;
+      }
+      ++t;
+    }
+
+        ofstream outFile;
+        outFile.open(NAME_OF_HIGH_SCORE_LIST.c_str());
+        outFile << "MULTIPLAYER" << endl;
+
+        for (g = multiplayerInitials.begin(); g != multiplayerInitials.end(); ++g)
+        {
+          if (g == multiplayerInitials.begin())
+          {
+            x = multiplayerScores.begin();
+          }
+
+          outFile << *g << " " << *x << endl;
+          
+          ++x;
+        }
+
+        outFile << "SINGLEPLAYER" << endl;
+        
+        for (y = singlePlayerInitials.begin(); y != singlePlayerInitials.end(); ++y)
+        {
+          if (y == singlePlayerInitials.begin())
+          {
+            z = singlePlayerScores.begin();
+          }
+
+          outFile << *y << " " << *z << endl;
+          
+          ++z;
+        }
+
+        outFile.close();
+
+      if (newHighScore == false)
+      {
+        cout << "No high score achieved during this game." << endl;
+      }
+}
+
+void HighScoreClass::printHighScoreList()
+{
+  ifstream inFile;
+  inFile.open(NAME_OF_HIGH_SCORE_LIST.c_str());
+
+  inFile >> multiplayerTitle;
+  cout << multiplayerTitle << endl;
+
+    for (int i = 0; i < LENGTH_OF_HIGH_SCORE_LIST; i++)
+    {
+      inFile >> existingMultiplayerInitials;
+      multiplayerInitials.push_back(existingMultiplayerInitials);
+      inFile >> existingMultiplayerScore;
+      multiplayerScores.push_back(existingMultiplayerScore);
+      cout << existingMultiplayerInitials << " " << existingMultiplayerScore << endl;
+    }
+
+  inFile >> singlePlayerTitle;
+  cout << singlePlayerTitle << endl;
+
+  for (int i = 0; i < LENGTH_OF_HIGH_SCORE_LIST; i++)
+  {
+    inFile >> existingSinglePlayerInitials;
+    singlePlayerInitials.push_back(existingSinglePlayerInitials);
+    inFile >> existingSinglePlayerScore;
+    singlePlayerScores.push_back(existingSinglePlayerScore);
+    cout << existingSinglePlayerInitials << " " << existingSinglePlayerScore << endl;
+  }
+}

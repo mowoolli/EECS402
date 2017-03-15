@@ -1,0 +1,22 @@
+MULTIPLAYER
+adc 10
+mjw 17
+sdc 20
+aer 30
+mow 38
+ddc 40
+rdc 50
+bdc 60
+hdc 70
+ydc 80
+SINGLEPLAYER
+zec 10
+zrc 20
+zfc 30
+zgc 40
+zjc 50
+chz 58
+zkc 60
+zuc 70
+znc 80
+zvc 90
